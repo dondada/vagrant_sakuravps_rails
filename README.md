@@ -14,6 +14,10 @@ It should allow you to have a development environment that is identical to your 
 + MySQL
 
 
+## Requirements
+
++ vagrant 1.6.3 or higher
++ ansible 1.7.2 or higher
 
 ## Prepare for Development Server(local vagrant)
 
