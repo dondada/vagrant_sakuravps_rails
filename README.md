@@ -66,8 +66,9 @@ It should allow you to have a development environment that is identical to your 
 
 1. Run the commands below:
 
-        ```
-        cd provision/ directory
+       
+	```
+        cd provision/ 
 
         change root password of sakura VPS manually
 
