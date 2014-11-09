@@ -14,9 +14,9 @@
     rails:
       dir: /var/www/rails/
   roles:
-    #- common
-    #- mysql
-    #- ruby
+    - common
+    - mysql
+    - ruby
     - rails
     #- nginx
 
