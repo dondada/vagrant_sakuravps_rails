@@ -1,0 +1,13 @@
+# OS-specific
+.DS_Store
+*.swp
+.swp
+
+# Vagrant stuff
+acceptance_config.yml
+boxes/*
+.vagrant
+/.vagrant
+/website/docs/.vagrant
+/website/www/.vagrant
+/vagrant-spec.config.rb

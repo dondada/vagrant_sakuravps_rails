@@ -1,0 +1,7 @@
+---
+- name: install MySQL
+  yum: name={{ item }} state=installed
+  with_items:
+    - mysql-server
+    - mysql-devel
+  tags: mysqld
