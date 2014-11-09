@@ -25,6 +25,8 @@ It should allow you to have a development environment that is identical to your 
 
 	```
         git clone <REPO_PATH>
+        mv vagrant_sakuravps_rails <app_name>
+        cd <app_name>
         vagrant up
         vagrant provision web
         vagrant ssh
