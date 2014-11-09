@@ -65,6 +65,7 @@ It should allow you to have a development environment that is identical to your 
 ## NOTE: this section is under construction... 
 
 1. Run the commands below:
+
         ```
         cd provision/ directory
 
