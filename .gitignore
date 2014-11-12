@@ -11,3 +11,4 @@ boxes/*
 /website/docs/.vagrant
 /website/www/.vagrant
 /vagrant-spec.config.rb
+provision/prod_hosts

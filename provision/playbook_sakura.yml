@@ -1,0 +1,22 @@
+- name: setting rails to server
+  hosts: prod_server
+  user: admin
+  sudo: yes
+  vars:
+    app_name: geeknews
+    environtment: sakura
+    mysql_port: 3306
+    home: "/home/{{user}}"
+    user: vagrant
+    src_dir: '/usr/local/src'
+    ruby_version: '2.1.2'
+
+    rails:
+      dir: /var/www/rails/
+  roles:
+    - common
+    - mysql
+    - ruby
+    - rails
+    #- nginx
+ 
