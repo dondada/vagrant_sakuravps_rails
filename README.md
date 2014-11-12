@@ -80,7 +80,7 @@ It should allow you to have a development environment that is identical to your 
 
         using following command, you can create basis ( iptables, disallow root login , and so on...)
         $ user_password=$(openssl passwd -salt salty -1 \<user password\>)  
-        $ ansible-playbook -k -c paramiko -i hosts sakura_root.yml -vv --extra-vars "user_password=$user_password"  
+        $ ansible-playbook -k -c paramiko -i prod_hosts sakura_root.yml -vv --extra-vars "user_password=$user_password"  
           
         create key pair for sakura VPS
         $ ssh-keygen -f ~/.ssh/sakura_rsa
