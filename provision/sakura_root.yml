@@ -7,7 +7,7 @@
 #     2. ansible-playbook -k -c paramiko -i hosts sakura_root.yml -vv --extra-vars "user_password=$user_password"
 #####
 - name: setting SakuraServer VPS by root
-  hosts: sakura_root
+  hosts: prod_server
   user: root
   vars:
     user_name: admin
