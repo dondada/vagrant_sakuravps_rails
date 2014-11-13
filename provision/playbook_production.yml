@@ -7,7 +7,7 @@
     environtment: sakura
     mysql_port: 3306
     home: "/home/{{user}}"
-    user: vagrant
+    user: admin
     src_dir: '/usr/local/src'
     ruby_version: '2.1.2'
 

@@ -11,28 +11,31 @@
     - libevent-devel
 
 - name: get ruby version
-  command: "ruby -e 'puts RUBY_VERSION'"
+  shell: "ruby -e 'puts RUBY_VERSION'"
   register: installed_ruby_version
+  ignore_errors: True
+- debug: var="{{installed_ruby_version}}"
+- debug: var="{{installed_ruby_version.stdout}}"
 
 - name: get ruby source
   get_url: url=http://cache.ruby-lang.org/pub/ruby/2.1/ruby-{{ ruby_version }}.tar.gz dest={{ src_dir }}
-  when: installed_ruby_version.stdout | version_compare(ruby_version, '!=')
+  when: installed_ruby_version.rc != "0" or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
 
 - name: expand ruby
   command: tar zxvf {{ src_dir }}/ruby-{{ ruby_version }}.tar.gz chdir={{ src_dir }}
-  when: installed_ruby_version.stdout | version_compare(ruby_version, '!=')
+  when: installed_ruby_version.rc !=0 or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
 
 - name: compile
   command: chdir={{ src_dir }}/ruby-{{ ruby_version }} ./configure --prefix=/usr
-  when: installed_ruby_version.stdout | version_compare(ruby_version, '!=')
+  when: installed_ruby_version.rc !=0 or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
 
 - name: ruby should be built
   command: chdir={{ src_dir }}/ruby-{{ ruby_version }} make
-  when: installed_ruby_version.stdout | version_compare(ruby_version, '!=')
+  when: installed_ruby_version.rc !=0 or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
 
 - name: ruby should be installed
   command: chdir={{ src_dir }}/ruby-{{ ruby_version }} make install
-  when: installed_ruby_version.stdout | version_compare(ruby_version, '!=')
+  when: installed_ruby_version.rc !=0 or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
 
 - name: update rubygems
   command: gem update --system

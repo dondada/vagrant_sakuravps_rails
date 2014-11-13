@@ -99,10 +99,6 @@ It should allow you to have a development environment that is identical to your 
           IdentityFile ~/.ssh/sakura_rsa  
         EOF  
 
-        cp prod_hosts.default prod_hosts
-        
-        replace xx.xx.xx.xx with your production server in prod_hosts file
-
         ansible-playbook -i prod_hosts playbook_production.yml
 	```
 
