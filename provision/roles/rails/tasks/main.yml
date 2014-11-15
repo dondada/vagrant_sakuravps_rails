@@ -2,6 +2,10 @@
 - name: Make Dir For Rails...
   shell: 'mkdir -p {{rails.dir}}'
 
+- name: "chmode rails.dir"
+  sudo: true
+  file: path={{ rails.dir }} recurse=yes mode=0755 
+
 # fix slow networking (due to IPv6) on CentOS 6.x
 - name: Fix slow networking (due to IPv6) 
   lineinfile: dest=/etc/resolv.conf line="options single-request-reopen" state=present insertafter=EOF

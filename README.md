@@ -31,7 +31,7 @@ It should allow you to have a development environment that is identical to your 
         vagrant provision web
         vagrant ssh
         
-        cd <Rails dir>
+        cd /var/www/rails
         gem install bundle 
 
         sudo chmod -R o+w /var/www

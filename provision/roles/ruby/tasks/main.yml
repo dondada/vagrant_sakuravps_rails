@@ -19,23 +19,23 @@
 
 - name: get ruby source
   get_url: url=http://cache.ruby-lang.org/pub/ruby/2.1/ruby-{{ ruby_version }}.tar.gz dest={{ src_dir }}
-  when: installed_ruby_version.rc != "0" or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
+  when: installed_ruby_version|failed 
 
 - name: expand ruby
   command: tar zxvf {{ src_dir }}/ruby-{{ ruby_version }}.tar.gz chdir={{ src_dir }}
-  when: installed_ruby_version.rc !=0 or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
+  when: installed_ruby_version|failed 
 
 - name: compile
   command: chdir={{ src_dir }}/ruby-{{ ruby_version }} ./configure --prefix=/usr
-  when: installed_ruby_version.rc !=0 or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
+  when: installed_ruby_version|failed 
 
 - name: ruby should be built
   command: chdir={{ src_dir }}/ruby-{{ ruby_version }} make
-  when: installed_ruby_version.rc !=0 or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
+  when: installed_ruby_version|failed 
 
 - name: ruby should be installed
   command: chdir={{ src_dir }}/ruby-{{ ruby_version }} make install
-  when: installed_ruby_version.rc !=0 or installed_ruby_version.stdout.split()[1] != {{ruby_version}}
+  when: installed_ruby_version|failed 
 
 - name: update rubygems
   command: gem update --system
@@ -44,81 +44,3 @@
   command: gem install bundler
 
 
-# Ruby
-#- name: get currently installed ruby version
-#  command: ruby -v
-#  register: result
-#  ignore_errors: True
-#
-#- name: Install ruby dependencies
-#  yum: name={{ item }}
-#       state=installed
-#  with_items:
-#    - gcc-c++
-#    - make
-#    - patch
-#    - readline
-#    - bzip2
-#    - autoconf 
-#    - automake 
-#    - libtool 
-#    - bison 
-#    - zlib
-#    - readline-devel
-#    - openssl-devel
-#    - libyaml-devel
-#    - zlib-devel
-#    - curl-devel
-#    - gettext-devel
-#    - libffi-devel
-#    - nodejs
-#  when: result.rc !=0 or result.stdout.split()[1] != ruby.version
-#
-#- name: Download binary from ruby offical website
-#  get_url: url={{ ruby.url }}
-#           dest={{ ruby.src_path }}
-#           sha256sum={{ ruby.sha256sum }}
-#  when: result.rc !=0 or result.stdout.split()[1] != ruby.version
-#
-#- name: Uncompress...
-#  command: tar -xf {{ ruby.file }}
-#           chdir={{ ruby.src_path }}
-#  when: result.rc !=0 or result.stdout.split()[1] != ruby.version
-#
-#- name: Install...
-#  command: name={{ item }}
-#           chdir="{{ ruby.src_path }}{{ ruby.dir }}"
-#  with_items:
-#    - ./configure
-#    - make
-#    - make install
-#  when: result.rc !=0 or result.stdout.split()[1] != ruby.version
-
-#- name: Install Ruby...
-#  shell: 'cd {{ruby.src_path}}{{ruby.dir}}; {{item}}'
-#  with_items:
-#    - ./configure
-#    - make
-#    - make install
-#  when: result.rc !=0 or result.stdout.split()[1] != ruby.version
-#
-#- name: Install bundler
-#  command: gem install bundler
-#
-# # use /usr/local/bin/ruby, not /usr/bin/ruby
-##- name: fix error for install rails
-##  sudo: yes
-##  shell: 'ls /usr/bin/ruby && mv /usr/bin/ruby /usr/bin/_ruby'
-#
-#- name: Make Ruby symlinks
-#  file: path=/usr/bin/{{ item }}
-#        src=/usr/local/bin/{{ item }}
-#        state=link
-#  with_items:
-#    - rake
-#    #- ruby
-#
-#- name: Copy .gemrc to $HOME
-#  copy: src=gemrc
-#        dest={{ home }}/.gemrc
-#        backup=no

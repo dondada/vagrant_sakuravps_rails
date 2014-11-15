@@ -4,7 +4,7 @@
   sudo: yes
   vars:
     app_name: geeknews
-    environtment: sakura
+    environtment: production
     mysql_port: 3306
     home: "/home/{{user}}"
     user: admin

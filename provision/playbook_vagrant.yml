@@ -18,5 +18,5 @@
     - mysql
     - ruby
     - rails
-    #- nginx
+    - nginx
 
