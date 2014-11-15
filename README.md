@@ -87,8 +87,7 @@ It should allow you to have a development environment that is identical to your 
 
 9. Let's coding !!
 
-## Prepare for Production Server(Sakura VPS) 
-## NOTE: this section is under construction... 
+## Prepare for Production Server(Sakura VPS) NOTE: this section is under construction...
 
 1. Run the commands below:
 
@@ -121,6 +120,7 @@ It should allow you to have a development environment that is identical to your 
 
         ansible-playbook -i prod_hosts playbook_production.yml
 	```
+
 ## Configuring Unicorn
 
 1. How to launch a unicorn server
