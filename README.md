@@ -125,11 +125,13 @@ It should allow you to have a development environment that is identical to your 
 
 #### How to launch a unicorn server
 
+
 	```
         unicorn_rails -c config/unicorn.rb -E development -D
 	```
 
 #### How to stop a unicorn server process from running
+
 
        In terminal "ps -ef | grep unicorn" and have a look for the Master Unicorn Process.
        And then type "kill -9 <Master Unicorn Process>"
