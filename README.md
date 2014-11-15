@@ -36,36 +36,56 @@ It should allow you to have a development environment that is identical to your 
 
         sudo chmod -R o+w /var/www
         rails new <app_name>
-        cd <app_name>
-        rails server -p 3000
 
 	```
-2. Append this line to /etc/sysconfig/iptables (as root)
+
+2. Install unicorn using gem
+       
+	```
+        sudo gem install unicorn
+	```
+
+3. open up a blank unicorn.rb document, which will be saved inside config/ directory
+       
+	```
+        vim config/unicorn.rb
+	```
+
+4. Place the below block of code. I recommend the following basic configuration:
+       
+        see https://gist.github.com/tjnet/e84578aed3d72d617457
+
+    Note: To test your app with unicorn, run unicorn_rails inside the application directory
+
+5. Append this line to /etc/sysconfig/iptables (as root)
        
 	```
         -A INPUT -p tcp -m tcp --dport 3000 -j ACCEPT 
 	```
-3. restart iptables
+6. restart iptables
        
 	```
         sudo /etc/init.d/iptables
 	```
 
-4. start MySQL
+7. start MySQL
 
 	```
         ps ax | grep mysqld
         sudo service mysqld start
 	```
        
-5. access your web app 
+8. access your web app 
 
 	```
+        cd /var/www/<app_name>
+        unicorn_rails -c config/unicorn.rb -E development -D
+        ps -ef | grep unicorn
         using web browser, access http://localhost:8080  
 	```
 
-5. Let's coding !!
 
+9. Let's coding !!
 
 ## Prepare for Production Server(Sakura VPS) 
 ## NOTE: this section is under construction... 
@@ -101,4 +121,17 @@ It should allow you to have a development environment that is identical to your 
 
         ansible-playbook -i prod_hosts playbook_production.yml
 	```
+## Configuring Unicorn
+
+#### How to launch a unicorn server
+
+	```
+        unicorn_rails -c config/unicorn.rb -E development -D
+	```
+
+#### How to stop a unicorn server process from running
+
+       In terminal "ps -ef | grep unicorn" and have a look for the Master Unicorn Process.
+       And then type "kill -9 <Master Unicorn Process>"
+
 
