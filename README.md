@@ -131,6 +131,10 @@ It should allow you to have a development environment that is identical to your 
 
 
        In terminal "ps -ef | grep unicorn" and have a look for the Master Unicorn Process.
-       And then type "kill -9 <Master Unicorn Process>"
+       And then type 
+
+	```
+        kill -9 \<Master Unicorn Process\>
+	```
 
 
