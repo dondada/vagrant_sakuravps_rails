@@ -125,10 +125,7 @@ It should allow you to have a development environment that is identical to your 
 
 #### How to launch a unicorn server
 
-
-	```
         unicorn_rails -c config/unicorn.rb -E development -D
-	```
 
 #### How to stop a unicorn server process from running
 
