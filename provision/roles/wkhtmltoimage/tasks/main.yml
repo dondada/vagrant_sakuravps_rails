@@ -1,0 +1,12 @@
+- name: check wkhtmltoimage is installed
+  shell: wkhtmltoimage --version
+  register: installed_version
+  ignore_errors: True
+
+- name: get rpm
+  get_url: url=http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-centos6-amd64.rpm dest={{src_dir}}
+  when: installed_version|failed 
+
+- name: install using rpm
+  yum: name={{src_dir}}/wkhtmltox-0.12.1_linux-centos6-amd64.rpm state=present
+  when: installed_version|failed 
