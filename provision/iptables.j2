@@ -14,6 +14,8 @@
 -A RH-Firewall-1-INPUT -p udp -m udp --dport 631 -j ACCEPT
 -A RH-Firewall-1-INPUT -p tcp -m tcp --dport 631 -j ACCEPT
 -A RH-Firewall-1-INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+# unicorn master port
+-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 3000 -j ACCEPT
 
 # add start
 -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport {{ ssh_port }} -j ACCEPT

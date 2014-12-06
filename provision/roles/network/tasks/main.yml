@@ -1,0 +1,5 @@
+- name: update iptables
+  template: src=iptables.j2 dest=/etc/sysconfig/iptables
+
+- name: restart iptables
+  shell: /etc/init.d/iptables restart
